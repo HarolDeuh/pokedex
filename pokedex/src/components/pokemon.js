@@ -2,26 +2,32 @@ import React, { useState, useEffect } from 'react';
 
 const Pokemon = () => {
 
-    const [pokemons, setPokemon] = useState({})
+    const [pokemons, setPokemons] = useState([])
 
-    const salamecheURL = 'https://pokeapi.co/api/v2/pokemon/?offset=3&limit=3'
-    const myWork = "Je suis Designer UX"
+    const salamecheURL = 'https://pokeapi.co/api/v2/pokemon/?limit=10'
 
-    async function fetchData() {
-        const res = await fetch(salamecheURL);
-        res
-            .json()
-            .then(res => setPokemon(res))
-    }
+    // async function fetchData() {
+    //     const res = await fetch(salamecheURL);
+    //     res
+    //         .json()
+    //         .then(data => {
+    //             setPokemons(data)
+    //         })
+    // }
 
     useEffect(() => {
-        fetchData();
-    });
+        fetch(salamecheURL)
+        .then(response => response.json())
+        .then(data => {
+            setPokemons(data.results)
+        })
+    }, [])
 
     return (
         <div>
-            <p>{JSON.stringify(pokemons)}</p>
-            <p>{pokemons.name}</p>
+            {pokemons.map(item => (
+                <p>{item.name}</p>
+            ))}
         </div>
     );
 }

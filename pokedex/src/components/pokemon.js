@@ -1,21 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
 const Pokemon = () => {
-    const name = "Harold Aholoukpe"
 
-    const componentDidMount = () => {
-        const apiURL = "https://pokeapi.co/api/v2/pokemon/pikachu"
-        fetch(apiURL)
-            .then((response) => response.json())
-            .then((data) => console.log('This is your data', data));
-    };
+    const [pokemons, setPokemon] = useState({})
+
+    const salamecheURL = 'https://pokeapi.co/api/v2/pokemon/?offset=3&limit=3'
+    const myWork = "Je suis Designer UX"
+
+    async function fetchData() {
+        const res = await fetch(salamecheURL);
+        res
+            .json()
+            .then(res => setPokemon(res))
+    }
+
+    useEffect(() => {
+        fetchData();
+    });
 
     return (
         <div>
-            Je suis {name}
-            <div>
-
-            </div>
+            <p>{JSON.stringify(pokemons)}</p>
+            <p>{pokemons.name}</p>
         </div>
     );
 }

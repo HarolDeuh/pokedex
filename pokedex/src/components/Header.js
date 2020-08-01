@@ -6,7 +6,7 @@ export default function Header() {
     return (
         <header>
             <Navigation />
-            <h1>Le pokédex de Harold</h1>
+            <h1>Pokedex</h1>
         </header>
     )
 }
